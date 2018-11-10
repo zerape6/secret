@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   padding: 0;
@@ -6,9 +7,292 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar { 
+  display: none; 
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  /*display: flex;
+  flex-direction: column;*/
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.title {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 72px;
+}
+
+.white {
+  color: white;
+}
+
+.p1 {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 64px;
+}
+
+.p2 {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 32px;
+}
+
+.scrolling-container {
+  min-height: 2000px;
+  background-color: #282c34;
+  justify-content: center;
+}
+
+.lock {
+  font-size: 100px;
+  color:white;
+}
+
+.helperBlock {
+  min-height: 30vh;
+}
+
+.empty-block-50 {
+  min-height:50px;
+}
+
+.empty-block-100 {
+  min-height:100px;
+}
+
+.empty-block-200 {
+  min-height:200px;
+}
+
+.empty-block-300 {
+  min-height:300px;
+}
+
+.empty-block-400 {
+  min-height:400px;
+}
+
+.empty-block-500 {
+  min-height:500px;
+}
+
+.empty-block-600 {
+  min-height:600px;
+}
+
+.chatContainer {
+  margin: 0.5em 0;
+}
+
+.bumbleProfile {
+  max-width: 100px;
+}
+
+.photo {
+  max-width: 600px;
+}
+
+.polaroid-images a {
+    background: white;
+    display: inline;
+    float: left;
+    margin: 0 15px 30px;
+    padding: 10px 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+    -moz-box-shadow: 0 4px 6px rgba(0,0,0,.3);
+    box-shadow: 0 4px 6px rgba(0,0,0,.3);
+    -webkit-transition: all .15s linear;
+    -moz-transition: all .15s linear;
+    transition: all .15s linear;
+    z-index:0;
+        position:relative;
+}
+
+.polaroid-images a:after {
+  color: #333;
+  font-size: 20px;
+  content: attr(title);
+  position: relative;
+  top:15px;
+}
+
+.polaroid-images img { 
+  display: block; 
+  width: inherit; 
+}
+
+.polaroid-images a:nth-child(2n)
+{
+    -webkit-transform: rotate(4deg);  
+    -moz-transform: rotate(4deg); 
+    transform: rotate(4deg); 
+}
+.polaroid-images a:nth-child(3n) { 
+    -webkit-transform: rotate(-24deg);  
+    -moz-transform: rotate(-24deg); 
+    transform: rotate(-24deg); 
+}
+.polaroid-images a:nth-child(4n)
+{
+    -webkit-transform: rotate(14deg);  
+    -moz-transform: rotate(14deg); 
+    transform: rotate(14deg); 
+}
+.polaroid-images a:nth-child(5n)
+{
+    -webkit-transform: rotate(-18deg);  
+    -moz-transform: rotate(-18deg); 
+    transform: rotate(-18deg); 
+}
+
+.polaroid-images a:hover{
+  -webkit-transform: rotate(0deg); 
+  -moz-transform: rotate(0deg);
+      transform: rotate(0deg);
+  -webkit-transform: scale(1.5); 
+  -moz-transform: scale(1.5);
+      transform: scale(1.5);
+  z-index:10;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
+  -moz-box-shadow: 0 10px 20px rgba(0,0,0,.7);
+      box-shadow: 0 10px 20px rgba(0,0,0,.7);
+}
+
+.leftChatBubble {
+  display: table;
+	position: relative;
+	background: #f8c537;
+  border-radius: .4em;
+  min-height: 50px;
+  max-width: 400px;
+  padding: 10px;
+}
+
+.leftChatBubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #f8c537;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+
+.leftChatMessage {
+  vertical-align: middle;
+  display: table-cell;
+  color: white;
+  text-align: center;
+  line-height: normal;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Helvetica Neue;
+}
+
+.rightChatBubble {
+  display: table;
+	position: relative;
+	background: #dedede;
+  border-radius: .4em;
+  min-height: 50px;
+  max-width: 400px;
+  padding: 10px;
+}
+
+.rightChatBubble:after {
+  content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #dedede;
+	border-right: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-right: -20px;
+}
+
+.rightChatMessage {
+  vertical-align: middle;
+  display: table-cell;
+  color: #333;
+  text-align: center;
+  line-height: normal;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Helvetica Neue;
+}
+
+#loading {
+  animation: 2s blink linear infinite;
+}
+
+.barloader {
+  display: block;
+  margin: 0 auto;
+}
+
+.Typist .Cursor {
+  display: inline-block;
+  font-size: 72px;
+}
+.Typist .Cursor--blinking {
+  animation: 1s blink step-end infinite;
+}
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
