@@ -11,6 +11,7 @@ class Bumble extends Component {
     super(props);
     this.state = this.getInitialState();
   }
+
   getInitialState() {
     return {
       scene: 1,
@@ -35,17 +36,8 @@ class Bumble extends Component {
   }
 
   render() {
-    console.log(this.state.scene)
     return (
       <div className="container">
-        <div className="p2 white" onClick={() => {
-          this.setState({ scene: 4}, () => {
-            scroller.scrollTo(`scene-4`, {
-              duration: 1500,
-              delay: 100,
-              smooth: true});
-          });
-        }}>Skip to end of bumble</div>
         <Fade fraction={1}>
           <div>
           <div className="empty-block-100"></div>

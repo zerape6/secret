@@ -4,6 +4,7 @@ import ChatMessage from './ChatMessage';
 import { Button } from 'react-bootstrap';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import { Image } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class Memories extends Component {
 
   constructor(props) {
@@ -16,15 +17,23 @@ class Memories extends Component {
     }
   }
 
+  revealNextScene() {
+    const nextScene = this.state.scene + 1;
+    this.setState({ scene: nextScene }, () => {
+      scroller.scrollTo(`scene-${nextScene}`, {
+        duration: 1500,
+        delay: 100,
+        smooth: true});
+    });
+  }
+
   render() {
     return (
       <div className="container">
-        <div className="empty-block-400"></div>
-        
-        <Element name="firstDate">
+        <Element>
           <Fade fraction={1}>
             <div>
-            <div className="empty-block-100"></div>
+            <div className="empty-block-50"></div>
             <p className="p1 white">~ March 13, 2018 ~</p>
             </div>
           </Fade>
@@ -33,6 +42,7 @@ class Memories extends Component {
               <p className="p2 white">Our first date</p>
             </div>
           </Fade>
+          <div className="empty-block-50"></div>
           <Fade>
             <div>
               <div class="polaroid-images">
@@ -42,17 +52,50 @@ class Memories extends Component {
               </div>
             </div>
           </Fade>
-          <div className="empty-block-400"></div>
-          <ChatMessage
-            isReceiver={true}
-            message="Hey, I had fun! I just remembered I totally forgot to pay you back for karaoke... My treat if you ever want to hang out again :)"
-            delay={2400} />
-          <ChatMessage
-            isReceiver={true}
-            message="Also I'm getting sick of bumble because my dating app tolerance is like 2 weeks at a time 😛 so just text me 604-781-7002"
-            delay={3200} />
+          <div className="clearfix"></div>
+          <div className="empty-block-100"></div>
+          <Fade>
+            <div className="row clearfix">
+              <FontAwesomeIcon onClick={this.revealNextScene.bind(this)} icon="angle-double-down" className="nextIndicator" />
+            </div>
+          </Fade>
           <div className="empty-block-600"></div>
         </Element>
+        {
+          this.state.scene > 1 &&
+          <Element name="scene-2">
+            <Fade fraction={1}>
+              <div>
+              <div className="empty-block-50"></div>
+              <p className="p1 white">~ March 19, 2018 ~</p>
+              </div>
+            </Fade>
+            <Fade fraction={1}>
+              <div>
+                <p className="p2 white">Date numero two</p>
+              </div>
+            </Fade>
+            <div className="empty-block-50"></div>
+            <Fade>
+              <div>
+                <div className="polaroid-images">
+                  <a className="polaroidFiller"></a>
+                  <a title="Pidgin"><img height="200" src="../img/pidgin.png"/></a>
+                  <a title="Smarty Pantz"><img height="200" src="../img/smartypantz.png"/></a>
+                  <a title="Karaoke"><img height="200" src="../img/karaoke.png"/></a>
+                </div>
+              </div>
+            </Fade>
+            <div className="clearfix"></div>
+            <div className="empty-block-100"></div>
+            <Fade>
+              <div className="row clearfix">
+                <FontAwesomeIcon onClick={this.revealNextScene.bind(this)} icon="angle-double-down" className="nextIndicator" />
+              </div>
+            </Fade>
+          </Element>
+        }
+        <div className="empty-block-600"></div>
       </div>
     );
   }

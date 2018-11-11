@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import SnowStorm from 'react-snowstorm';
 import Landing from "./components/Landing";
+import Acknowledge from "./components/Acknowledge";
 import Bumble from "./components/Bumble";
 import Memories from "./components/Memories";
+import Santa from "./components/Santa";
 import Fade from 'react-reveal/Fade';
-import { Button } from 'react-bootstrap';
+import { Button, Navbar, NavItem, Nav } from 'react-bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faLockOpen, faAngleDoubleDown, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 class App extends Component {
-
+  
   constructor(props) {
     super(props);
     library.add(faLock);
     library.add(faLockOpen);
+    library.add(faAngleDoubleDown);
+    library.add(faArrowAltCircleDown);
     this.state = this.getInitialState();
   }
 
@@ -23,79 +27,96 @@ class App extends Component {
     return {
       landingFinished: false,
       bumbleFinished: false,
-      acknowledged: false,
+      acknowledgeFinished: false,
     }
   }
 
   onLandingFinished() {
-    this.setState({landingFinished: true});
-  }
-
-  onBumbleFinished() {
-    this.setState({bumbleFinished: true}, () => {
-      scroller.scrollTo("firstDate", {
+    this.setState({landingFinished: true}, () => {
+      scroller.scrollTo("acknowledge", {
         duration: 1500,
         delay: 100,
         smooth: true});
     });
   }
 
-  acknowledge() {
-    this.setState({acknowledged: true}, () => {
-      scroller.scrollTo("bumble", {
+  onBumbleFinished() {
+    this.setState({bumbleFinished: true}, () => {
+      scroller.scrollTo("memories", {
         duration: 1500,
-        delay: 200,
+        delay: 100,
         smooth: true});
     });
+  }
+
+  onAcknowledgeFinished() {
+    this.setState({acknowledgeFinished: true}, () => {
+      scroller.scrollTo("bumble", {
+        duration: 1500,
+        delay: 100,
+        smooth: true});
+    });
+  }
+  devNavbar() {
+    return(
+      <Navbar className="navbar" fixedTop={true}>
+      <Nav>
+        <NavItem eventKey={1} href="#">
+          <div onClick={() => {
+            this.landing.onTypingDone();
+          }}>Skip typewriter</div>
+        </NavItem>
+        <NavItem eventKey={2} href="#">
+          <div onClick={() => {
+            this.onLandingFinished();
+            this.onAcknowledgeFinished();
+          }}>Skip acknowledge</div>
+        </NavItem>
+        <NavItem eventKey={2} href="#">
+          <div onClick={() => {
+              this.setState({acknowledgeFinished: true}, () => {
+                scroller.scrollTo("bumble", {
+                  duration: 1500,
+                  delay: 100,
+                  smooth: true});
+                this.bumble.setState({scene: 3}, () => {
+                  this.bumble.revealNextScene();
+              });
+            });
+          }}>Skip to end of bumble</div>
+        </NavItem>
+        <NavItem eventKey={2} href="#">
+          <div onClick={() => {
+            this.onLandingFinished();
+            this.onAcknowledgeFinished();
+            this.onBumbleFinished();
+          }}>Skip to memories</div>
+        </NavItem>
+      </Nav>
+      </Navbar>
+    );
   }
 
   renderScrollingContainer() {
     return (
       <div className="scrolling-container">
-      <div className="p2 white" onClick={() => {
-          this.onLandingFinished();
-          this.acknowledge();
-        }}>Skip acknowledge</div>
-        <div className="empty-block-400"></div>
-        <Fade fraction={1}>
-          <div>
-            <div className="empty-block-100"></div>
-            <p className="p2 white">What you're about to see is a website of all our memories</p>
-            <div className="empty-block-100"></div>
-          </div>
-        </Fade>
-        <div className="empty-block-400"></div>
-        <Fade fraction={1}>
-          <div>
-            <div className="empty-block-100"></div>
-            <p className="p2 white">Starting from the first day we matched...</p>
-            <div className="empty-block-100"></div>
-          </div>
-        </Fade>
-        <div className="empty-block-200"></div>
-        <div className="empty-block-50"></div>
-        <Fade fraction={1}>
-          <div>
-            <div className="empty-block-100"></div>
-            <p className="p2 white">Before continuing, you must acknowledge that you understand this website will be cheesy and it WILL make you vomit</p>
-            <div className="empty-block-50"></div>
-            <Button disabled={this.state.acknowledged} bsStyle="primary" onClick={this.acknowledge.bind(this)}>Acknowledge</Button>
-            <div className="empty-block-50"></div>
-            <FontAwesomeIcon icon={`${this.state.acknowledged ? "lock-open" : "lock"}`} className="lock" />
-            <div className="empty-block-100"></div>
-          </div>
-        </Fade>
-        <div className="empty-block-200"></div>
-        { this.state.acknowledged && 
-        <span>
-          <div className="empty-block-300"></div>
+        { this.state.landingFinished && 
+          <span>
+            <Element name="acknowledge">
+              <Acknowledge onAcknowledgeFinished={this.onAcknowledgeFinished.bind(this)} />
+            </Element>
+            <div className="empty-block-200"></div>
+          </span>
+        }
+        { this.state.acknowledgeFinished && 
           <Element name="bumble">
-            <Bumble onBumbleFinished={this.onBumbleFinished.bind(this)} />
+            <Bumble ref={(ip) => this.bumble = ip} onBumbleFinished={this.onBumbleFinished.bind(this)} />
           </Element>
-        </span>
         }
         { this.state.bumbleFinished &&
-          <Memories />
+          <Element name="memories">
+            <Memories />
+          </Element>
         }
       </div>
     );
@@ -104,14 +125,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.devNavbar()}
         <header className="App-header">
-          <Landing onLandingFinished={this.onLandingFinished.bind(this)} />
+          <Landing ref={(ip) => this.landing = ip} onLandingFinished={this.onLandingFinished.bind(this)} />
         </header>
-        <div className="p2 white" onClick={() => {
-          this.onLandingFinished();
-          this.onBumbleFinished();
-        }}>Skip to memories</div>
-        { this.state.landingFinished && this.renderScrollingContainer() }
+        { this.renderScrollingContainer() }
         <SnowStorm 
           vMaxY={5} 
           vMaxX={0} 

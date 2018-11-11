@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Typist from 'react-typist';
 import Fade from 'react-reveal/Fade';
+import NextIndicator from "./NextIndicator";
 
 class Landing extends Component {
 
@@ -8,7 +9,7 @@ class Landing extends Component {
     super(props);
     this.typeWriter = React.createRef();
     this.state = this.getInitialState();
-    this.onFinished = props.onLandingFinished;
+    this.onLandingFinished = props.onLandingFinished;
   }
 
   componentDidMount() {
@@ -28,9 +29,11 @@ class Landing extends Component {
     this.setState({
       showNextIndicator: true,
     });
+  }
 
-    if (typeof this.onFinished === "function") {
-      this.onFinished();
+  finishLanding() {
+    if (typeof this.onLandingFinished === "function") {
+      this.onLandingFinished();
     }
   }
 
@@ -115,14 +118,13 @@ class Landing extends Component {
         {this.state.showNextIndicator &&
         <div>
           <div className="empty-block-100"></div>
-          <div className="empty-block-100"></div>
+          <div className="empty-block-50"></div>
           <Fade>
-            <p className="p2">Scroll down</p>
+            <p className="p2">Click below to continue</p>
           </Fade>
+          <div className="empty-block-25"></div>
+          <NextIndicator onClick={this.finishLanding.bind(this)} />
         </div>}
-        <div onClick={() => {
-          this.onTypingDone();
-        }}>Skip typewriter</div>
       </div>
     );
   }
