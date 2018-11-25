@@ -5,26 +5,27 @@ class Santa extends Component {
   render() {
     return (
       <div className="santa-container">
-      <div class="window">
-        <div class="santa">
-            <div class="head">
-                <div class="face">
-                    <div class="redhat">
-                        <div class="whitepart"></div>
-                        <div class="redpart"></div>
-                        <div class="hatball"></div>
+      <div className="window">
+        <div className="santa">
+            <div className="head">
+                <div className="face">
+                    <div className="redhat">
+                        <div className="whitepart"></div>
+                        <div className="redpart"></div>
+                        <div className="hatball"></div>
                     </div>
-                    <div class="eyes"></div>
-                    <div class="beard">
-                        <div class="nouse"></div>
-                        <div class="mouth"></div>
+                    <div className="eyes"></div>
+                    <div className="beard">
+                        <div className="nouse"></div>
+                        <div className="mouth"></div>
                     </div>
                 </div>
-                <div class="ears"></div>
+                <div className="ears"></div>
             </div>
-            <div class="body"></div>
+            <div className="body"></div>
         </div>
     </div>
+    <div className="clearfix"></div>
     </div>
     );
   }

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Typist from 'react-typist';
 import Fade from 'react-reveal/Fade';
 import NextIndicator from "./NextIndicator";
+import BounceLoader from 'react-spinners/BounceLoader';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Image } from 'react-bootstrap';
 
 class Landing extends Component {
 
@@ -10,24 +14,43 @@ class Landing extends Component {
     this.typeWriter = React.createRef();
     this.state = this.getInitialState();
     this.onLandingFinished = props.onLandingFinished;
+
+    this.audioElement = document.createElement('audio');
+    this.audioElement.setAttribute('src', './type.mp3');
+    
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({scene: 2})
-    }, 10)
+
+  revealNextScene() {
+    const nextScene = this.state.scene + 1;
+    this.setState({ 
+      scene: nextScene,
+      containerStyle: nextScene === 3 ? {} : this.state.containerStyle,
+    });
   }
 
   getInitialState() {
     return {
       showNextIndicator: false,
       scene: 1,
+      containerStyle: {    
+        flex: "1",
+        alignItems: "center",
+        display: "flex"
+      },
     }
+  }
+
+  onCharacterTyped() {
+    const sound = document.createElement('audio');
+    sound.setAttribute('src', './type4.wav');
+    sound.play();
   }
 
   onTypingDone() {
     this.setState({
       showNextIndicator: true,
+      scene: this.state.scene+1,
     });
   }
 
@@ -37,9 +60,13 @@ class Landing extends Component {
     }
   }
 
+
   getTypingScene() {
     return (
-      <Typist 
+      <div className="computerScreen align-items-left">
+      <div className="empty-block-50"></div>
+      <Typist
+        id="typist"
         cursor={{
           show: true,
           blink: true,
@@ -47,84 +74,104 @@ class Landing extends Component {
           hideWhenDone: true,
           hideWhenDoneDelay: 0,
           }}
-        avgTypingDelay={100}
-        startDelay={2000}
-        onTypingDone={this.onTypingDone.bind(this)}>
+        avgTypingDelay={130}
+        startDelay={3000}
+        onTypingDone={this.onTypingDone.bind(this)}
+        onCharacterTyped={this.onCharacterTyped.bind(this)}>
+        <span>Dear </span>
         <Typist.Delay ms={2000} />
-        <span className="title">Dear </span>
-        <Typist.Delay ms={2000} />
-        <span className="title">Grace,</span>
-        <Typist.Backspace count={6} delay={2000} />
-        <Typist.Delay ms={2000} />
-        <span className="title">Taterthot,</span>
-        <Typist.Backspace count={10} delay={2000} />
-        <Typist.Delay ms={2000} />
-        <span className="title">girlfriRnd,</span>
-        <Typist.Backspace count={4} delay={3000}/>
+        <span>Grace,</span>
+        <Typist.Backspace count={6} delay={1500} />
         <Typist.Delay ms={1000} />
-        <span className="title">end,</span>
-        <Typist.Backspace count={11} delay={2500}/>
-        <Typist.Delay ms={3000} />
-        <span className="title">future</span>
+        <span>Taterthot,</span>
+        <Typist.Backspace count={10} delay={1500} />
         <Typist.Delay ms={1000} />
-        <span className="title"> wife?</span>
-        <Typist.Backspace count={1} delay={2500}/>
-        <Typist.Backspace count={5} delay={2000}/>
-        <Typist.Backspace count={6} delay={1000}/>
-        <Typist.Delay ms={2000} />
-        <span className="title">cute</span>
+        <span>girlfriRnd,</span>
+        <Typist.Backspace count={4} delay={1500}/>
+        <Typist.Delay ms={700} />
+        <span>end,</span>
+        <Typist.Backspace count={11} delay={1500}/>
         <Typist.Delay ms={1500} />
-        <span className="title"> but dumb,</span>
-        <Typist.Delay ms={1000} />
-        <span className="title"> :)</span>
-        <Typist.Backspace count={3} delay={2000}/>
-        <Typist.Backspace count={15} />
-        <Typist.Delay ms={2000} />
-        <Typist.Backspace count={5} />
-        <Typist.Delay ms={3000} />
-        <span className="title">Grace</span>
+        <span>my wittle particle :3</span>
         <Typist.Delay ms={1500} />
-        <span className="title"> Yu</span>
-        <Typist.Delay ms={2000} />
         <br></br>
-        <Typist.Delay ms={3000} />
-        <span className="title">Merry </span>
-        <Typist.Delay ms={500} />
-        <span className="title">Christmas</span>
-        <Typist.Delay ms={2000} />
-        <span className="title"> :)</span>
-        <Typist.Delay ms={2000} />
+        <span style={{paddingLeft: "40px", fontSize: "122px"}}>Merry </span>
+        <Typist.Delay ms={1500} />
+        <span style={{fontSize: "122px"}}>Christmas  </span>
+        <Typist.Delay ms={1500} />
+        <span style={{fontSize: "122px"}}>:)</span>
       </Typist>
+      </div>
     );
-  }
-
-  getScene() {
-    if (this.state.scene === 1) {
-      return (
-        <div>
-          <p id="loading" className="p2">Waiting for snow to fall</p>
-        </div>
-      );
-    } else if (this.state.scene === 2) {
-      return this.getTypingScene();
-    }
   }
 
   render() {
     return (
-      <div>
-        <div className="helperBlock"></div>
-        {this.getScene()}
-        {this.state.showNextIndicator &&
-        <div>
-          <div className="empty-block-100"></div>
-          <div className="empty-block-50"></div>
+      <div style={this.state.containerStyle}>
+        { this.state.scene === 1 &&
           <Fade>
-            <p className="p2">Click below to continue</p>
+            <div className="computerScreen">
+            <p className="h2 white">Click to connect to Aodh's keyboard</p>
+            <p className="h4 white">(he's got some shit to say to you, woman)</p>
+            <div className="empty-block-25"></div>
+            <Button id="connectButton" className="connectButton" 
+              bsStyle="primary" 
+              onClick={() => {
+                const sound = document.createElement('audio');
+                sound.setAttribute('src', './jeopardy-short.mp3');
+                sound.play();
+                this.revealNextScene()
+              }}>
+              <FontAwesomeIcon icon="plug" className="connectIcon" />
+            </Button>
+            </div>
           </Fade>
-          <div className="empty-block-25"></div>
-          <NextIndicator onClick={this.finishLanding.bind(this)} />
-        </div>}
+        } 
+        { this.state.scene === 2 &&
+          <Fade onReveal={() => {
+            setTimeout(() => {
+              this.revealNextScene();
+            }, 16600);
+          }} exit={true}>
+            <div className="computerScreen">
+              <p className="h2 white">Please wait...</p>
+              <div className="empty-block-25"></div>
+              <div className="center">
+                <BounceLoader
+                  sizeUnit={"px"}
+                  size={100}
+                  color={'#de2f32'}
+                  loading={true}
+                />
+              </div>
+              <Fade delay={4000} duration={5000}>
+                <div style={{position: "absolute", top:"-100px", left:"100px"}}>
+                  <p className="h4 white">My girlfriend:</p>
+                  <div>
+                    <Image src="../img/graceprofile.png" height="300px" />
+                  </div>
+                </div>
+              </Fade>
+              <Fade delay={11000} duration={5000}>
+                <div style={{position: "absolute", top:"-100px", right:"100px"}}>
+                  <p className="h4 white">Me:</p>
+                  <div>
+                    <Image src="../img/patrick.png" height="400px" />
+                  </div>
+                </div>
+              </Fade>
+            </div>
+          </Fade>
+        }
+        { this.state.scene >= 3 &&
+          this.getTypingScene()
+        }
+        { this.state.showNextIndicator &&
+          <div>
+            <div className="empty-block-100"></div>
+            <NextIndicator onClick={this.finishLanding.bind(this)} />
+          </div>
+        }
       </div>
     );
   }

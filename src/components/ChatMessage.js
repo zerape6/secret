@@ -4,9 +4,18 @@ import { Image } from 'react-bootstrap';
 
 class ChatMessage extends Component {
 
+  onReveal() {
+    console.log("revealed");
+    setTimeout(() => {
+      const sound = document.createElement('audio');
+      sound.setAttribute('src', './message.mp3');
+      sound.play();
+    }, this.props.delay+200);
+  }
+
   renderReceiver() {
     return (
-      <Slide left cascade fraction={1} delay={this.props.delay}>
+      <Slide left cascade fraction={1} delay={this.props.delay} onReveal={this.onReveal.bind(this)} duration={600}>
         <div>
           <div className="row chatContainer">
             <div className="col-md-2">
@@ -23,7 +32,7 @@ class ChatMessage extends Component {
 
   renderSender() {
     return (
-      <Slide right cascade fraction={1} delay={this.props.delay}>
+      <Slide right cascade fraction={1} delay={this.props.delay} onReveal={this.onReveal.bind(this)} duration={800}>
         <div>
           <div className="row chatContainer">
             <div className="rightChatBubble col-md-10 col-md-push-5 col-md-offset-1">

@@ -31,7 +31,7 @@ class Bumble extends Component {
       setTimeout(() => {
         this.setState({ scene: nextScene + 1 });
         this.props.onBumbleFinished();
-      }, 4000);
+      }, /*400*/0);
     }  
   }
 
@@ -40,35 +40,35 @@ class Bumble extends Component {
       <div className="container">
         <Fade fraction={1}>
           <div>
-          <div className="empty-block-100"></div>
-          <p className="p1 white">~ March 5, 2018 ~</p>
+          <div className="empty-block-50"></div>
+          <p className="p1 white">~ Bumble ~</p>
           </div>
         </Fade>
         <Fade  fraction={1}>
           <div>
-          <p className="p2 white">Bumble</p>
-          <div className="empty-block-100"></div>
+          <p className="p2 white">The following messages are real</p>
+          <div className="empty-block-50"></div>
           </div>
         </Fade>
         <ChatMessage
           isReceiver={true}
-          message="Opinion of DDLC?"
-          delay={400} />
+          message="Hey handsome"
+          delay={3000} />
         <ChatMessage
           isReceiver={false}
-          message="Hey Grace! I've never played it, should I?" 
-          delay={1200} />
+          message="Hi." 
+          delay={6000} />
         <ChatMessage
           isReceiver={true}
-          message="Depends, how are you with creepy/ horror games?" 
-          delay={2000} />
+          message="Was your mother a beaver? ‘Cause damn!" 
+          delay={9000} />
         <ChatMessage
           isReceiver={false}
-          message="I actually don't game that much... I only play league 😆" 
-          delay={2800} />
+          message="I'm uncomfortable." 
+          delay={14000} />
         <div className="empty-block-50"></div>
         {this.state.scene === 1 ?
-        <Fade delay={3600}>
+        <Fade delay={16000}>
           <Button bsStyle="primary" onClick={this.revealNextScene.bind(this)}>Jump to recent messages</Button>
           <div className="empty-block-100"></div>
         </Fade> :
@@ -78,31 +78,31 @@ class Bumble extends Component {
           this.state.scene > 1 &&
           <Element name="scene-2">
             <div className="empty-block-50"></div>
-            <p className="p2 white">Doggos</p>
+            <p className="p2 white">Aodh tries to have a normal conversation</p>
             <div className="empty-block-50"></div>
             <ChatMessage
               isReceiver={false}
-              message="So you like dogs? I have a FAT german shepherd 😄 (he's in Victoria though)"
-              delay={400} />
+              message="So what do you do for a living?"
+              delay={4000} />
             <ChatMessage
               isReceiver={true}
-              message="Ohhhhh my god YES. I love german shepherds. And a T H I C C german shepherd is EVEN BETTER 😍"
-              delay={1200} />
+              message="I work at Subway because I want your footlong 😉"
+              delay={8000} />
             <ChatMessage
               isReceiver={true}
-              message="Too cute"
-              delay={2000} />
+              message="😘 😘 😘"
+              delay={11000} />
             <ChatMessage
               isReceiver={false}
-              message="Hey maybe one day you can meet my dog! Hes a very very bad boy."
-              delay={2800} />
+              message="Lmao..."
+              delay={15500} />
             <ChatMessage
               isReceiver={false}
-              message="He's 9 years old."
-              delay={3600} />
+              message="I don't have a footlong"
+              delay={19500} />
             <div className="empty-block-50"></div>
             {this.state.scene === 2 ?
-            <Fade delay={4800}>
+            <Fade delay={22000}>
               <Button bsStyle="primary" onClick={this.revealNextScene.bind(this)}>Jump to recent messages</Button>
               <div className="empty-block-100"></div>
             </Fade> : <div className="empty-block-600"></div>
@@ -113,31 +113,31 @@ class Bumble extends Component {
           this.state.scene > 2 &&
           <Element name="scene-3">
             <div className="empty-block-50"></div>
-            <p className="p2 white">Boring people</p>
+            <p className="p2 white">🤔 🤔 🤔</p>
             <div className="empty-block-50"></div>
             <ChatMessage
               isReceiver={true}
-              message="So what do you usually do when you're not working?"
-              delay={400} />
-              <ChatMessage
-              isReceiver={false}
-              message="I'm the most boring human possible. On a typical week day, i make dinner, workout, maybe watch an episode of anime, and then league with friends."
-              delay={1200} />
-              <ChatMessage
-              isReceiver={false}
-              message="What about you? Whats your typical day?"
+              message="If you were a Transformer, you’d be Optimus Fine."
               delay={2000} />
             <ChatMessage
+              isReceiver={false}
+              message="Ok"
+              delay={7000} />
+            <ChatMessage
               isReceiver={true}
-              message="That's a pretty typical weekday for most people. My schedule is pretty similar though sometimes I do freelance work which kind of wrecks my routine."
-              delay={2800} />
-              <ChatMessage
+              message="My doctor told me I’m missing vitamin U."
+              delay={11000} />
+            <ChatMessage
               isReceiver={true}
-              message="I can't wait till the weather gets nicer so I can do running and hiking!"
-              delay={3600} />
+              message="Can you help me?"
+              delay={14500} />
+            <ChatMessage
+              isReceiver={false}
+              message="Bye"
+              delay={18500} />
             <div className="empty-block-50"></div>
             {this.state.scene === 3 ?
-            <Fade delay={4400}>
+            <Fade delay={21000}>
               <Button bsStyle="primary" onClick={this.revealNextScene.bind(this)}>Jump to recent messages</Button>
               <div className="empty-block-100"></div>
             </Fade> : <div className="empty-block-600"></div>
@@ -145,22 +145,34 @@ class Bumble extends Component {
           </Element>
         }
         {
-          this.state.scene === 4 &&
+          this.state.scene > 3 &&
           <Element name="scene-4">
             <div className="empty-block-50"></div>
             <p className="p2 white">Lets meet up!</p>
             <div className="empty-block-50"></div>
             <ChatMessage
               isReceiver={false}
-              message="Lets meet up sometime. Its nice talking to you 😊"
-              delay={400} />
+              message="If I go on a date with you, will you leave me alone."
+              delay={2000} />
             <ChatMessage
               isReceiver={true}
-              message="Yeah, I'd like to meet up as well. I'm a bit busy this week since I'm moving, but I should be free next week :)"
-              delay={1200} />
+              message="Yes"
+              delay={7000} />
+            <ChatMessage
+              isReceiver={false}
+              message="Ok one date and thats it."
+              delay={11000} />
+            <ChatMessage
+              isReceiver={true}
+              message="Lmao aight"
+              delay={15000} /> 
+            <ChatMessage
+              isReceiver={false}
+              message="Im serious."
+              delay={19000} />
             <div className="empty-block-50"></div>
             {this.state.scene === 4 &&
-            <Fade delay={2000}>
+            <Fade delay={21000}>
               <Button bsStyle="primary" onClick={() => {
                 this.revealNextScene();
               }}>Exit Bumble</Button>
@@ -169,10 +181,11 @@ class Bumble extends Component {
             }
           </Element>
         }
-        {
-          this.state.scene === 5 &&
+        {/*
+          this.state.scene > 4 &&
+          <Element name="scene-5">
           <Fade>
-            <div className="empty-block-50"></div>
+            <div className="empty-block-400"></div>
             <div className="center">
               <BounceLoader
                 sizeUnit={"px"}
@@ -184,7 +197,9 @@ class Bumble extends Component {
             <p className="p2 white">Loading memories...</p>
             <div className="empty-block-600"></div>
           </Fade>
-        }
+          </Element>
+        */}
+        <div className="empty-block-600"></div>
       </div>
     );
   }

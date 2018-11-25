@@ -4,6 +4,11 @@
   background-color: transparent;
   border: none;
 }
+
+html {
+  overflow: 'hidden';
+  height: '100%';
+}
 body {
   margin: 0;
   padding: 0;
@@ -12,16 +17,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #de2f32;/*#c9e1e0;*/
+  background: linear-gradient(#c9e1e0, #fff) no-repeat;
+  background-attachment: fixed;
   overflow-x: hidden;
+  overflow: 'hidden';
+  height: '100%';
 }
+
 
 body::-webkit-scrollbar { 
   display: none; 
 }
 
 /* Animations */
-@keyframes hover {
+@keyframes floatUpAndDown {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -33,22 +42,91 @@ body::-webkit-scrollbar {
   }
 }
 
-.nextIndicator {
-  font-size: 80px;
+.nextIndicatorWithSanta {
+  position: relative;
+  top:-100px;
+}
+
+.nextIndicatorContainer {
+  justify-content: center;
+  display: flex;
+}
+
+.nextIndicatorButton {
   font-family: 'Berkshire Swash', cursive;
-  text-align: center;
-  animation-name: hover;
-  animation-iteration-count: infinite;
-  animation-duration: 2.5s;
-  color: #f8e7dc;
+  display: flex;
+  justify-content: center;
+  background-color: #de2f32;
+  color:white;
+  width: 80px;
+  padding: 10px 20px;
+  border-radius: 50%;
+  height: 80px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.santa-container {
-  margin-left: 50%;
-  margin-top: 200px;
-}
-.nextIndicator:hover {
-  color: white;
+
+.nextIndicatorButton:hover {
   cursor: pointer;
+  transition: all 200ms ease-in-out;
+  transform: scale(1.2);
+  outline: none !important;
+  background-color: white;
+  outline: none;
+  color: #de2f32;
+}
+
+.computerMonitor {
+  display:  flex;
+  justify-content: space-between;
+  border: solid 2em #333;
+  border-radius: 1em;
+  height:80vh;
+  background: #a0d5d3; 
+  flex-direction: column;
+}
+
+.computeMonitorBottom {
+  border-top: solid 2em #333;
+  height: 100px;
+  background: #333;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.computerScreen { 
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+  position:relative;
+  align-items: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-left {
+  align-items: flex-start;
+  text-align: left;
+  padding: 0 50px;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 36px;
+  color: #de2f32;
+  text-shadow: 0 .05em .1em white;
+}
+
+.appleLogo {
+  color:white;
+}
+
+.nextIndicatorIcon {
+  font-size: 48px;
 }
 
 .App {
@@ -60,13 +138,19 @@ body::-webkit-scrollbar {
   height: 40vmin;
 }
 
+.viewportBox {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .App-header {
   min-height: 100vh;
-  /*display: flex;
-  flex-direction: column;*/
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
 }
 
 .App-link {
@@ -87,24 +171,66 @@ code {
     monospace;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:visited {
+.btn-primary {
   background-color: #de2f32/*#db3e3e*/ !important;
   font-family: 'Open Sans', sans-serif;
-  border: 5px solid #f8e7dc;
   border: none;
 }
 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:visited {
+  background-color: white !important;
+  outline: none;
+  color: #de2f32;
+  border: none;
+}
+
+.connectButton {
+  width: 80px;
+  padding: 10px 20px;
+  border-radius: 50%;
+  height: 80px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.connectIcon { 
+  font-size: 48px;
+}
+
+.connectButton:hover, .connectButton:focus {
+  transition: all 200ms ease-in-out;
+  transform: scale(1.2);
+  outline: none !important;
+}
+
 .acknowledge {
+  width: 300px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  height: 100px;
   font-size: 24px;
-  padding: 15px 20px;
-  border: 5px solid #f8e7dc;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.acknowledge:hover {
+  transition: all 200ms ease-in-out;
+  transform: scale(1.2);
+  outline: none !important;
 }
 
 .title {
-  font-family: 'Berkshire Swash', cursive;
-  font-size: 72px;
-  color: #f8e7dc;
-  /*text-shadow: 0 .05em .1em #f8e7dc;*/
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  color: #de2f32;
+  text-shadow: 0 .05em .1em white;
 }
 
 .white {
@@ -113,17 +239,39 @@ code {
 
 .p1 {
   font-family: 'Berkshire Swash', cursive;
-  /*text-shadow: 0 .05em .1em #f8e7dc;*/
+  text-shadow: 0 .05em .1em white;
   font-size: 64px;
-  color: #f8e7dc;
+  color: #de2f32;
 }
 
 .p2 {
-  font-family: 'Berkshire Swash', cursive;
+  font-family: 'Alegreya Sans', sans-serif;
   color: #de2f32;
-  /*text-shadow: 0 .05em .1em #f8e7dc;*/
+  text-shadow: 0 .05em .1em white;
   font-size: 32px;
-  color: #f8e7dc;
+}
+
+.h2 {
+  font-family: 'Alegreya Sans', sans-serif;
+  color: #de2f32;
+  text-shadow: 0 0.05em 0.1em white;
+  font-size: 36px;
+}
+
+.h3 {
+  font-family: 'Alegreya Sans', sans-serif;
+  color: #de2f32;
+  text-shadow: 0 0.05em 0.1em white;
+  font-size: 24px;
+}
+
+.h4 {
+  font-family: 'Alegreya Sans', sans-serif;
+  color: #de2f32;
+  text-shadow: 0 0.05em 0.1em white;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .clearfix {
@@ -134,17 +282,19 @@ code {
   font-family: 'Open Sans', sans-serif;
   color: #db3e3e;
   font-weight: bold;
-  /*text-shadow: 0 .05em .1em #f8e7dc;*/
+  text-shadow: 0 .05em .1em #f8e7dc;
   font-size: 20px;
 }
 
 .scrolling-container {
   justify-content: center;
+  overflow: 'hidden';
+  height: '100%';
 }
 
 .lock {
   font-size: 100px;
-  color:#f8e7dc;
+  color:#de2f32;
 }
 
 .helperBlock {
@@ -355,7 +505,8 @@ code {
 
 .Typist .Cursor {
   display: inline-block;
-  font-size: 64px;
+  font-size: 36px;
+  text-shadow: none;
 }
 .Typist .Cursor--blinking {
   animation: 1s blink step-end infinite;
@@ -365,7 +516,7 @@ code {
     color: transparent;
   }
   50% {
-    color: #f8e7dc;
+    color: #de2f32;
   }
 }
 

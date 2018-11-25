@@ -4,12 +4,13 @@ import Landing from "./components/Landing";
 import Acknowledge from "./components/Acknowledge";
 import Bumble from "./components/Bumble";
 import Memories from "./components/Memories";
+import Snapchat from "./components/Snapchat";
 import Santa from "./components/Santa";
 import Fade from 'react-reveal/Fade';
 import { Button, Navbar, NavItem, Nav } from 'react-bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock, faLockOpen, faAngleDoubleDown, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faLockOpen, faAngleDoubleDown, faArrowAltCircleDown, faPlug, faSortDown, faAppleAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 class App extends Component {
@@ -20,7 +21,14 @@ class App extends Component {
     library.add(faLockOpen);
     library.add(faAngleDoubleDown);
     library.add(faArrowAltCircleDown);
+    library.add(faPlug);
+    library.add(faSortDown);
+    library.add(faAppleAlt);
     this.state = this.getInitialState();
+  }
+
+  componentDidMount() {
+    window.onwheel = function(){ return false; }
   }
 
   getInitialState() {
@@ -42,7 +50,7 @@ class App extends Component {
 
   onBumbleFinished() {
     this.setState({bumbleFinished: true}, () => {
-      scroller.scrollTo("memories", {
+      scroller.scrollTo("snapchat", {
         duration: 1500,
         delay: 100,
         smooth: true});
@@ -53,7 +61,7 @@ class App extends Component {
     this.setState({acknowledgeFinished: true}, () => {
       scroller.scrollTo("bumble", {
         duration: 1500,
-        delay: 100,
+        delay: 500,
         smooth: true});
     });
   }
@@ -90,7 +98,7 @@ class App extends Component {
             this.onLandingFinished();
             this.onAcknowledgeFinished();
             this.onBumbleFinished();
-          }}>Skip to memories</div>
+          }}>Skip to snapchat</div>
         </NavItem>
       </Nav>
       </Navbar>
@@ -102,7 +110,7 @@ class App extends Component {
       <div className="scrolling-container">
         { this.state.landingFinished && 
           <span>
-            <Element name="acknowledge">
+            <Element>
               <Acknowledge onAcknowledgeFinished={this.onAcknowledgeFinished.bind(this)} />
             </Element>
             <div className="empty-block-200"></div>
@@ -114,8 +122,8 @@ class App extends Component {
           </Element>
         }
         { this.state.bumbleFinished &&
-          <Element name="memories">
-            <Memories />
+          <Element name="snapchat">
+            <Snapchat />
           </Element>
         }
       </div>
@@ -127,7 +135,14 @@ class App extends Component {
       <div className="App">
         {this.devNavbar()}
         <header className="App-header">
-          <Landing ref={(ip) => this.landing = ip} onLandingFinished={this.onLandingFinished.bind(this)} />
+          <div className="container">
+            <div className="computerMonitor">
+              <Landing ref={(ip) => this.landing = ip} onLandingFinished={this.onLandingFinished.bind(this)} />
+              <div className="computeMonitorBottom">
+                  <FontAwesomeIcon icon="apple-alt" className="appleLogo connectIcon" />
+                </div>
+            </div>
+          </div>
         </header>
         { this.renderScrollingContainer() }
         <SnowStorm 

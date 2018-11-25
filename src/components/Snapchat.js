@@ -6,7 +6,7 @@ import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } 
 import { Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NextIndicator from "./NextIndicator";
-class Memories extends Component {
+class Snapchat extends Component {
 
   constructor(props) {
     super(props);
@@ -32,35 +32,21 @@ class Memories extends Component {
     return (
       <div className="container">
         <Element>
-          <Fade fraction={1}>
-            <div>
-            <div className="empty-block-50"></div>
-            <p className="p1 white">~ March 13, 2018 ~</p>
-            </div>
-          </Fade>
-          <Fade fraction={1}>
-            <div>
-              <p className="p2 white">Our first date</p>
-            </div>
-          </Fade>
-          <div className="empty-block-50"></div>
-          <Fade>
-            <div>
-              <div class="polaroid-images">
-                <a title="Guu Otokomae"><img height="200" src="../img/guu.png"/></a>
-                <a title="Smarty Pantz"><img height="200" src="../img/smartypantz.png"/></a>
-                <a title="Karaoke"><img height="200" src="../img/karaoke.png"/></a>
-              </div>
-            </div>
-          </Fade>
-          <div className="clearfix"></div>
           <div className="empty-block-100"></div>
-          <Fade>
-            <div className="row clearfix">
-              <NextIndicator onClick={this.revealNextScene.bind(this)} />
+            <div className="container">
+            <Fade fraction={1}>
+              <div className="empty-block-100"></div>
+              <p className="p2 white">And thats how it all started...</p>
+            </Fade>  
+            <Fade fraction={1} delay={2500}>
+              <div className="empty-block-100"></div>
+              <p style={{fontSize:"100px"}}>👈😎👉</p>
+              </Fade>  
             </div>
-          </Fade>
-          <div className="empty-block-600"></div>
+            <Fade fraction={1} delay={2500}>
+              <p className="p3 white">Stay in school, kiddos</p>
+            </Fade> 
+          <div className="empty-block-200"></div>
         </Element>
         {
           this.state.scene > 1 &&
@@ -102,4 +88,4 @@ class Memories extends Component {
   }
 }
 
-export default Memories;
+export default Snapchat;

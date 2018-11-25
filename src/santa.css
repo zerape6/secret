@@ -19,6 +19,14 @@ body {
   border: 10px solid #f8e7dc;
   overflow: hidden; }
 
+  .window::after {
+    height: 0px;}
+
+.santa-container {
+  margin-left: 50%;
+  margin-top: 200px;
+}
+
 .santa {
   position: absolute;
   left: 50%;
